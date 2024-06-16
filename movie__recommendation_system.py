@@ -63,21 +63,17 @@ movie_df = movie_df.dropna()
 tag_df = tag_df.dropna()
 rating_df = rating_df.dropna()
 
-#Categorical Encoding
-# for column in ['tag']:
-#     tag_df[column] = label_encoder.fit_transform(tag_df[column])
-
 
 #joining movies and rating dataset on movieId
 df = pd.merge(rating_df, movie_df, on="movieId", how="inner")
-# print(df.head())
-# print(df.shape)
+print(df.head())
+print(df.shape)
 
 #removing movies with less than 100 reviews due to the lack of processing power
 agg_df = df.groupby('movieId').agg(mean_rating= ('rating', 'mean'), number_of_rating=('rating', 'count')).reset_index()
 agg_df = agg_df[agg_df['number_of_rating']>100]
-# print(agg_df.shape)
-# print(agg_df.value_counts)
+print(agg_df.shape)
+print(agg_df.value_counts)
 
 # sns.jointplot(x='mean_rating', y='number_of_rating', data=agg_df)
 
@@ -86,21 +82,21 @@ print(df_gt100.info)
 
 #Creating user-movie matrix
 user_movie_matrix = df_gt100.pivot_table(index='userId', columns='title', values='rating')
-# print(user_movie_matrix.head())
-# print(user_movie_matrix.shape)
+print(user_movie_matrix.head())
+print(user_movie_matrix.shape)
 
 
 #Normalizeing user item rating
 matrix_norm = user_movie_matrix.subtract(user_movie_matrix.mean(axis=1), axis='rows')
-# print(matrix_norm.head())
+print(matrix_norm.head())
 
 #finding similar users
 user_similarity = cosine_similarity(matrix_norm.fillna(0))
-# print(user_similarity.shape)
+print(user_similarity.shape)
 
 #finding similar movies
 movie_similarity = cosine_similarity(matrix_norm.fillna(0))
-# print(movie_similarity.shape)
+print(movie_similarity.shape)
 
 #picking a users based on a userId
 picked_userId = 1
@@ -111,7 +107,7 @@ user_similarity = pd.DataFrame(StandardScaler().fit_transform(user_similarity))
 
 #removing the selected user from the matrix
 user_similarity.drop(index=picked_userId, inplace=True)
-# print(user_similarity.shape)
+print(user_similarity.shape)
 
 #setting up variables
 number_of_simlar_users = 10
@@ -119,20 +115,20 @@ user_similarity_threshold = 0.3
 
 #finding similar users
 similar_users = user_similarity[user_similarity[picked_userId]>user_similarity_threshold].index
-# print("similar_users")
-# print(similar_users)
+print("similar_users")
+print(similar_users)
 
 #finding the movies watched by the user
 picked_user_watched = matrix_norm[matrix_norm.index==picked_userId].dropna(axis=1, how='all')
-# print(picked_user_watched.shape)
+print(picked_user_watched.shape)
 
 #keeping movies watched by similar users
 similar_users_movies = matrix_norm[matrix_norm.index.isin(similar_users)].dropna(axis=1, how='all')
-# print(similar_users_movies.shape)
+print(similar_users_movies.shape)
 
 #removing the wwatched movies from the list
 similar_users_movies.drop(picked_user_watched.columns, axis=1, inplace=True, errors='ignore')
-# print(similar_users_movies.shape)
+print(similar_users_movies.shape)
 
 #calculating item scores
 item_score = {}
@@ -154,3 +150,8 @@ print(item_score)
 ranked_item_score = pd.DataFrame(item_score.items(), columns=['movieId', 'movie_score']).sort_values(by='movie_score', ascending=False)
 answer =ranked_item_score.head(number_of_simlar_users) 
 print(answer)
+
+
+
+
+
