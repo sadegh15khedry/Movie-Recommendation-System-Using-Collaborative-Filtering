@@ -14,23 +14,22 @@ This repository contains Python code for building a movie recommendation system 
 
 ## Getting Started
 
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/sadegh15khedry/MovieRecommendationSystem.git
-   cd recommendation-system
+   cd Movie-Recommendation-System-Using-Collaborative-Filtering
    ```
 
-2. Install the required libraries:
+2. Install the required libraries using the environment.yml file using conda:
    ```bash
-   pip install pandas, numpy, sklearn, matplotlib, seaborn
+   conda env create -f environment.yml
    ```
 
 3. Download the movieLens datasets (`movies.csv`, `tags.csv`, `ratings.csv`) and update the path to them in the code.
 
-4. Run the `recommendation_system.py` script to generate movie recommendations:
-   ```bash
-   python movie__recommendation_system.py
-   ```
+4. Run the `recommendation_system.ipynb` notebook to generate movie recommendations:
+
 
 ## Code Description
 
