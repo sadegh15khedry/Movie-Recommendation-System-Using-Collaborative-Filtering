@@ -2,18 +2,13 @@
 
 This repository contains Python code for building a movie recommendation system using collaborative filtering techniques. Below is a breakdown of the files and functionalities included:
 
-## Files Included
+1. [Installation](#installation)
+2. [Code Description](#code-description)
+3. [Author](#author)
+4. [License](#license)
 
-- `recommendation_system.py`: Python script containing the implementation of the recommendation system.
 
-
-## Prerequisites
-
-- Python 3.x
-- Required libraries: pandas, numpy, sklearn, matplotlib, seaborn
-
-## Getting Started
-
+## Installation
 
 1. Clone this repository:
    ```bash
@@ -28,7 +23,7 @@ This repository contains Python code for building a movie recommendation system 
 
 3. Download the movieLens datasets (`movies.csv`, `tags.csv`, `ratings.csv`) and update the path to them in the code.
 
-4. Run the `recommendation_system.ipynb` notebook to generate movie recommendations:
+4. Run the `recommendation_system.ipynb` notebook to generate movie recommendations.
 
 
 ## Code Description
